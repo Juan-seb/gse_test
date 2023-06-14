@@ -11,20 +11,22 @@ export const factSlice = createSlice({
   initialState,
   reducers: {
     addFacts: (state, action) => {
+      const catFacts = action.payload.map((fact: catFact, index: number) => {
+        const firstWord = fact.fact.split(' ')[0]
+
+        return {
+          id: index,
+          fact: fact.fact,
+          length: fact.length,
+          state: false,
+          firstWord,
+          urlImage: `https://cataas.com/cat/says/${firstWord}`
+        }
+      })
+
       return {
         ...state,
-        catFacts: action.payload.map((fact: catFact, index: number) => {
-          const firstWord = fact.fact.split(' ')[0]
-
-          return {
-            id: index,
-            fact: fact.fact,
-            length: fact.length,
-            state: false,
-            firstWord,
-            urlImage: `https://cataas.com/cat/says/${firstWord}`
-          }
-        })
+        catFacts
       }
     },
     catFactById: (state, action) => {
