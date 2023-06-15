@@ -9,5 +9,4 @@ export interface catFact {
 
 export interface initialStateFact {
   catFacts: catFact[]
-  catFact: catFact | null
 }

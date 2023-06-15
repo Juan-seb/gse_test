@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client'
 import ReduxProvider from './redux/Provider'
 import Root from './Root.tsx'
 
+// Create the routes of the app
 const router = createBrowserRouter([
   {
     path: '/',

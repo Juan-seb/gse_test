@@ -17,8 +17,10 @@ const PageFact = (): JSX.Element => {
   const [fact, setFact] = useState<catFact>()
 
   useEffect(() => {
+    // Check if the 'id' parameter is undefined to avoid errors
     if (id === undefined) return
 
+    // Find the cat fact with the matching 'id' and set it as the 'fact' state
     const fact = catFacts.find(fact => fact.id === parseInt(id))
     console.log(fact)
     setFact(fact)

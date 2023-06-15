@@ -13,16 +13,17 @@ const shouldSkipQuery = (): boolean => {
   return catFacts.length > 0
 }
 function Root (): JSX.Element {
-  const [pages, setPages] = useState<number>(0)
-  const [elementsInPage, setElementsInPage] = useState<number[]>([0, 10])
-  const [pageSelected, setPageSelected] = useState<number>(1)
-  const [updateFacts, result] = useUpdateAllFactsMutation()
+  const [pages, setPages] = useState<number>(0) // State for the total number of pages
+  const [elementsInPage, setElementsInPage] = useState<number[]>([0, 10]) // State for the range of elements to display on the current page
+  const [pageSelected, setPageSelected] = useState<number>(1) // State for the currently selected page
+  const [updateFacts, result] = useUpdateAllFactsMutation() // Mutation hook for updating all facts
   const { data } = useGetNumberFactsQuery('', {
     skip: shouldSkipQuery()
-  })
-  const { catFacts } = useSelector((state: RootState) => state.fact)
+  }) // Query hook for getting the number of facts
+  const { catFacts } = useSelector((state: RootState) => state.fact) // Selecting catFacts from the Redux store
   const dispatch = useDispatch()
 
+  // Fetching the all facts of cats using data.total as the number of facts to fetch - this is done only once because the data is stores with Redux Persist
   useEffect(() => {
     const updateFactsRequest = async (): Promise<any> => {
       if (data === undefined) return
@@ -37,13 +38,14 @@ function Root (): JSX.Element {
     updateFactsRequest().catch(error => console.log(error))
   }, [data])
 
+  // Updating the state with the fetched cat facts - this is done only once because the data is stores with Redux Persist
   useEffect(() => {
     if (result.data === undefined) return
-    console.log(result.data.data)
 
     dispatch(addFacts(result.data.data))
   }, [result])
 
+  // Calculating the total number of pages based on the catFacts length
   useEffect(() => {
     if (catFacts === undefined) return
 
@@ -51,6 +53,7 @@ function Root (): JSX.Element {
     setPages(pages)
   }, [catFacts])
 
+  // Updating the range of elements to display based on the selected page
   useEffect(() => {
     if (catFacts === undefined) return
 

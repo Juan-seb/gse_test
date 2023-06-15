@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { catFact, initialStateFact } from '../../types'
 
 const initialState: initialStateFact = {
-  catFacts: [],
-  catFact: null
+  catFacts: []
 }
 
 export const factSlice = createSlice({
@@ -11,6 +10,7 @@ export const factSlice = createSlice({
   initialState,
   reducers: {
     addFacts: (state, action) => {
+      // Mapping the payload data to create an array of cat facts with the props we need
       const catFacts = action.payload.map((fact: catFact, index: number) => {
         const firstWord = fact.fact.split(' ')[0]
 
@@ -24,18 +24,10 @@ export const factSlice = createSlice({
         }
       })
 
-      return {
-        ...state,
-        catFacts
-      }
-    },
-    catFactById: (state, action) => {
-      return {
-        ...state,
-        catFact: state.catFacts.find((fact) => fact.id === action.payload) as catFact
-      }
+      return catFacts
     },
     updateStateFact: (state, action) => {
+      // Updating the state (active/inactive) of a cat fact by id
       const id = action.payload
       const factToEdit = state.catFacts.find((fact) => fact.id === id) as catFact
 
@@ -46,6 +38,6 @@ export const factSlice = createSlice({
   }
 })
 
-export const { addFacts, catFactById, updateStateFact } = factSlice.actions
+export const { addFacts, updateStateFact } = factSlice.actions
 
 export default factSlice.reducer

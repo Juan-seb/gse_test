@@ -13,7 +13,7 @@ const CardCat = ({ id, state }: { id: number, state: boolean }): JSX.Element => 
   const dispatch = useDispatch()
 
   const handleChangeState = (): void => {
-    dispatch(updateStateFact(id))
+    dispatch(updateStateFact(id)) // Dispatching the updateStateFact action with the id as the payload to update the state of the fact
   }
 
   return (
