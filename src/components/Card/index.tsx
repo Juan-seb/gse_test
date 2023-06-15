@@ -23,7 +23,7 @@ const CardCat = ({ id, state }: { id: number, state: boolean }): JSX.Element => 
           Dato curioso {id}
         </Typography>
         <Typography>
-          Estado: {`${state ? 'Activo' : 'Inactivo'}`}
+          Estado: <span className={`font-bold ${state ? 'text-green-400' : 'text-red-400'}`}>{`${state ? 'Activo' : 'Inactivo'}`}</span>
         </Typography>
       </CardBody>
       <CardFooter className='flex flex-col pt-0'>

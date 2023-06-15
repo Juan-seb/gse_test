@@ -6,7 +6,7 @@ const Pagination = ({ pages, setPageSelected }: { pages: number, setPageSelected
   const [active, setActive] = useState(1)
 
   const next = (): void => {
-    if (active === 5) return
+    if (active === pages) return
 
     setActive(active + 1)
     setPageSelected(active + 1)
@@ -20,7 +20,7 @@ const Pagination = ({ pages, setPageSelected }: { pages: number, setPageSelected
   }
 
   return (
-    <div className='w-full h-[50px] flex justify-center items-center'>
+    <div className='w-full h-[50px] flex justify-center items-center my-6'>
       <div className='flex items-center gap-8'>
         <IconButton
           size='sm'
@@ -40,7 +40,7 @@ const Pagination = ({ pages, setPageSelected }: { pages: number, setPageSelected
           variant='outlined'
           color='blue-gray'
           onClick={next}
-          disabled={active === 10}
+          disabled={active === pages}
         >
           <ArrowRightIcon strokeWidth={2} className='h-4 w-4' />
         </IconButton>
